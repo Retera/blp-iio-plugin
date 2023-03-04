@@ -19,6 +19,7 @@ import javax.imageio.spi.ImageReaderSpi;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 
+import com.hiveworkshop.blizzard.blp.BLPStreamMetadata.SampleType;
 import com.hiveworkshop.lang.LocalizedFormatedString;
 
 /**
@@ -174,6 +175,12 @@ public class BLPReader extends ImageReader {
 		} else if (streamMeta.getEncodingType() == BLPEncodingType.INDEXED) {
 			mipmapProcessor = new IndexedMipmapProcessor(
 					streamMeta.getAlphaBits());
+		} else if(streamMeta.getEncodingType() ==  BLPEncodingType.DXT3) {
+			mipmapProcessor = new DXTMipmapProcessor(streamMeta.getAlphaBits(), SampleType.DXT3);
+		} else if(streamMeta.getEncodingType() ==  BLPEncodingType.DXT5) {
+			mipmapProcessor = new DXTMipmapProcessor(streamMeta.getAlphaBits(), SampleType.DXT5);
+		} else if(streamMeta.getEncodingType() ==  BLPEncodingType.DXT1) {
+			mipmapProcessor = new DXTMipmapProcessor(streamMeta.getAlphaBits(), SampleType.DXT1);
 		} else {
 			throw new IIOException("Unsupported content type.");
 		}

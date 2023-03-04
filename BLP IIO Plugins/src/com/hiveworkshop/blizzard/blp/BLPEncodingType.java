@@ -50,7 +50,10 @@ public enum BLPEncodingType {
 	 * encoding type will throw an exception. Chances are this is one of the
 	 * poorly documented World of Warcraft BLP encoding formats.
 	 */
-	UNKNOWN(0x001, 2);
+	UNKNOWN(0x001, 2),
+	DXT3(0x001, 2),
+	DXT5(0x001, 2),
+	DXT1(0x001, 2);
 
 	/**
 	 * Mask of what alphaBits values are valid for a given encoding type. Bit 0

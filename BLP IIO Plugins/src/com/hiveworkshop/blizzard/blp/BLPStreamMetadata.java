@@ -121,7 +121,7 @@ public final class BLPStreamMetadata extends IIOMetadata {
 		/**
 		 * Who knows!
 		 */
-		UNKNOWN1,
+		A8,
 		/**
 		 * DXT5 sample model. 4*4 pixels in 128 bits with 8 bit alpha support.
 		 */
@@ -129,11 +129,15 @@ public final class BLPStreamMetadata extends IIOMetadata {
 		/**
 		 * Who knows!
 		 */
-		UNKNOWN2,
+		UNSPECIFIED,
 		/**
 		 * Component sampling model with 18 bit pixels?
 		 */
-		BGRA2565
+		BGRA2565,
+		
+		UNKNOWN_10,
+		
+		BC5 //DXGI_FORMAT_BC5_UNORM
 	}
 
 	/**
@@ -234,6 +238,15 @@ public final class BLPStreamMetadata extends IIOMetadata {
 		else if (contentType == ContentType.DIRECT
 				&& pixmapType == PixmapType.INDEXED)
 			return BLPEncodingType.INDEXED;
+		else if(pixmapType == PixmapType.SAMPLED && sampleType == SampleType.DXT3) {
+			return BLPEncodingType.DXT3;
+		}
+		else if(pixmapType == PixmapType.SAMPLED && sampleType == SampleType.DXT5) {
+			return BLPEncodingType.DXT5;
+		}
+		else if(pixmapType == PixmapType.SAMPLED && sampleType == SampleType.DXT1) {
+			return BLPEncodingType.DXT1;
+		}
 		return BLPEncodingType.UNKNOWN;
 	}
 
